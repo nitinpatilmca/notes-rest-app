@@ -1,6 +1,8 @@
 package org.gotprint.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -18,10 +20,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "USERS", schema = "gotprint" )
-public class Users implements Serializable {
+public class Users implements Serializable , UserDetails{
 
 	protected static final Logger LOGGER = Logger.getLogger(Users.class);
 	private static final long serialVersionUID = 299817514520320650L;
@@ -112,7 +117,40 @@ public class Users implements Serializable {
 		this.roles = roles;
 	}
 
-	
+	@Override
+	public boolean isAccountNonExpired() {
 
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+
+		for (Roles role : roles) {
+			grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleId()));
+		}
+
+		return grantedAuthorities;
+	}
 	
 }
