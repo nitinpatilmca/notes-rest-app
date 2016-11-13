@@ -18,30 +18,9 @@ public class UserValidator {
 	private Pattern emailPattern  = Pattern.compile(EMAIL_PATTERN);
 	private Pattern passwordPattern = Pattern.compile(PASSWORD_PATTERN);;
 	
-
-
-	public UserValidator() {
-		//emailPattern = Pattern.compile(EMAIL_PATTERN);
-		//passwordPattern = Pattern.compile(PASSWORD_PATTERN);
-	}
-
-	/**
-	 * Validate emailId with regular expression
-	 *
-	 * @param emailId for validation
-	 * @return true valid emailId, false invalid emailId
+	/*
+	 * Validate User Email Id
 	 */
-/*	public boolean validEmail(final String emailId) {
-		matcher = emailPattern.matcher(emailId);
-		return matcher.matches();
-	}
-
-	public  boolean validPassword(final String password) {
-		matcher = passwordPattern.matcher(password);
-		return matcher.matches();
-	}*/
-	
-	
 	public boolean validEmail(Users user) throws UserException {
 		Matcher matcher = emailPattern.matcher(user.getEmail());
 		if(!matcher.matches()){
@@ -49,6 +28,10 @@ public class UserValidator {
 		}
 		return true; 
 	}
+
+	/*
+	 * Validate User Passwrod
+	 */
 	public boolean validPassword(Users user) throws UserException {
 		Matcher matcher = passwordPattern.matcher(user.getPassword());
 		if(!matcher.matches()){
@@ -57,21 +40,14 @@ public class UserValidator {
 		return true; 
 	}
 	
+	/*
+	 * Returns true if user of object is null
+	 */
 	public boolean isUniqueEmailId(Users user) throws UserException {		
 		if(user != null){
 			throw new UserException("Email is already taken by other user, Please choose valid - " + user.getEmail());
 		}
 		return true; 
 	}
-	
-	public static void main(String[] args) {
-		
-		/*System.out.println(new EmailValidator().validPassword("ong1A@23"));
-		System.out.println(new EmailValidator().validPassword("jackA@23"));
-		*/
-
-
-	}
-
 	
 }

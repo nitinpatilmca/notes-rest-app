@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DateUtility {
-
+     /*
+      * Returns currrent Date
+      */
 	public Date getCurrentDate() {
 		LocalDateTime currentTime = LocalDateTime.now();
 		Date todayDate = Date.from(currentTime.atZone(ZoneId.systemDefault()).toInstant());
