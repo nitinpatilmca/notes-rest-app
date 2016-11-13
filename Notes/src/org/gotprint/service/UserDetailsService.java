@@ -36,4 +36,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 		return userDetails;		
 	}
 
+	public Users findUser(String userName) {
+		return userDetailsRepository.findOne(userName);
+	}
 }
