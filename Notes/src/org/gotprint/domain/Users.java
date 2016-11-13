@@ -49,7 +49,7 @@ public class Users implements Serializable , UserDetails{
 	private Date lastUpdateOn;
 
 	// uni-directional many-to-many association to Note
-	@OneToMany(mappedBy = "users")
+	@OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
 	private List<Notes> notes;
 
 	@ManyToMany(fetch = FetchType.EAGER)
