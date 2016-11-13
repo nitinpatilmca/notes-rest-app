@@ -15,6 +15,6 @@ public interface NoteService {
 
 	public void deleteNotes(Users user) throws NotesAppBaseException;
 
-	public List<Notes> getNotes(Users user) throws NotesAppBaseException;;
+	public List<Notes> getNotes(String userId) throws NotesAppBaseException;;
 
 }

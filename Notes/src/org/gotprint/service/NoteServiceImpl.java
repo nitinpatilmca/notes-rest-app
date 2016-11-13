@@ -1,7 +1,9 @@
 package org.gotprint.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.gotprint.domain.Notes;
 import org.gotprint.domain.Users;
@@ -53,21 +55,26 @@ public class NoteServiceImpl implements NoteService {
 		
 		List<Notes> userNotes = notesWrapper.getNotes();
 		for(Notes note : userNotes){
-			noteValidator.validTitle(note);
+			noteValidator.validTitle(note);	// Validate first
 			noteValidator.validNote(note);
+			//System.out.println("Input : "+note.hashCode());
 		}
 		List<Notes> persistenUserNotes = notesRepository.getNotesByUserId(notesWrapper.getUserId());
+		Map<String, Notes> persistenUserNotesMapping = new HashMap<String, Notes>();
+
+		for(Notes note : persistenUserNotes){
+			persistenUserNotesMapping.put(note.getTitle(), note);
+		}
+		
 		for(Notes note : userNotes){
-			int noteIndex = persistenUserNotes.indexOf(note);
-			if(noteIndex != -1){
-				Notes persistenNote = persistenUserNotes.get(noteIndex);
-				note.setNoteId(persistenNote.getNoteId());
-				note.setLastUpdateOn(dateUtility.getCurrentDate());
+			Notes exisitingNote = persistenUserNotesMapping.get(note.getTitle());
+			if(exisitingNote != null){
+				note.setNoteId(exisitingNote.getNoteId());			
 			}
 			note.setLastUpdateOn(dateUtility.getCurrentDate());
 			note.setUsers(user);
-			
 		}
+		persistenUserNotesMapping = null;
 		notesRepository.save(userNotes);
 	}
 
@@ -79,8 +86,8 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 	@Override
-	public List<Notes> getNotes(Users userNotes) throws UserException {
-		Users user = getUser(userNotes.getUsername());
+	public List<Notes> getNotes(String userId) throws UserException {
+		Users user = getUser(userId);
 		return user != null ? user.getNotes() : new ArrayList<Notes>();
 	}
 	
