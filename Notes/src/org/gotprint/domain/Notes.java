@@ -53,9 +53,9 @@ public class Notes implements Serializable, Comparator<Notes> {
 	@JoinColumn(name="USER_ID")
 	private Users users;
 
-	public Notes(String title) {
+	/*	public Notes(String title) {
 		this.title = title;
-	}
+	}*/
 
 	@Override
 	public int compare(Notes o1, Notes o2) {
@@ -139,5 +139,25 @@ public class Notes implements Serializable, Comparator<Notes> {
 		this.users = users;
 	}
 	
-
+	public static void main(String[] args) {
+		
+		Notes n1 = new Notes();
+		Notes n2 = new Notes();
+		n1.setTitle("Introduction 1"); n1.setNote("N1");
+		n2.setTitle("Introduction 2");n2.setNote("N2");
+		
+		Notes n3 = new Notes();
+		n3.setTitle("Introduction 2");
+		
+		List<Notes> list = new ArrayList<>();
+		System.out.println(n1.hashCode());
+		System.out.println(n2.hashCode());
+		list.add(n1);
+		list.add(n2);
+		
+		System.out.println(list.indexOf(n3));
+		
+		
+	}
+	
 }
