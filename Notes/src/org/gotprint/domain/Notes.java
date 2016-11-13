@@ -139,23 +139,5 @@ public class Notes implements Serializable, Comparator<Notes> {
 		this.users = users;
 	}
 	
-	public static void main(String[] args) {
-		
-		Notes n1 = new Notes("one");
-		Notes n2 = new Notes("two");
-		
-		Notes n3 = new Notes("one");
-		Notes n4 = new Notes("two4");
-	
-		List<Notes> list = new ArrayList<>();
-		System.out.println(n1.hashCode());
-		System.out.println(n2.hashCode());
-		list.add(n1);
-		list.add(n2);
-		
-		System.out.println(list.indexOf(n3));
-		
-		
-	}
 
 }
