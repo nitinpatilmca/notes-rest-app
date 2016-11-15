@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserValidator emailValidator;
+	private UserValidator userValidator;
 
 	@Autowired
 	private UserDetailsRepository userDetailsRepository;
@@ -20,10 +20,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void addUser(final Users user) throws UserException {
-		emailValidator.validEmail(user);
-		emailValidator.validPassword(user);
-		emailValidator.isUniqueEmailId(userDetailsRepository.findUserByEmailId(user.getEmail()));
-		userDetailsRepository.save(user);
+		if(!userValidator.isUserExist(userDetailsRepository.findOne(user.getUsername()))){
+			userValidator.validEmail(user);
+			userValidator.validPassword(user);
+			userValidator.isUniqueEmailId(userDetailsRepository.findUserByEmailId(user.getEmail()));
+			userDetailsRepository.save(user);			
+		}
+		
 	}
 
 }
