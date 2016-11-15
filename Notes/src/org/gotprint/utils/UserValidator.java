@@ -49,5 +49,14 @@ public class UserValidator {
 		}
 		return true; 
 	}
-	
+
+	/*
+	 * Returns true if user of object is exist
+	 */
+	public boolean isUserExist(Users user) throws UserException {		
+		if(user != null){
+			return true; 
+		}
+		return false;
+	}
 }
