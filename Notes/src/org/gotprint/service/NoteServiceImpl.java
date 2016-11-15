@@ -101,47 +101,6 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 
-	
-	
-
-	
-/*	@RequestMapping(value="/addNote", method = RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes="application/json; charset=UTF-8")	
-	public String addNote(@RequestBody List<Notes> userNotes) throws JSONException{
-		
-		return "";
-	}
-	
-	@RequestMapping(value="/user", method = RequestMethod.POST, produces = "application/json; charset=UTF-8", consumes="application/json; charset=UTF-8")	
-	public String getSiteList() throws JSONException{
-		JSONArray sitesJosn = new JSONArray();
-		JSONObject u1 = new JSONObject();
-		JSONObject u2= new JSONObject();
-		
-		u1.put("id", "1");
-		u2.put("id", "2");
-		sitesJosn.put(u1);
-		sitesJosn.put(u2);
-		
-		return sitesJosn.toString();
-	}
-	
-	
-	 private static final String template = "Hello, %s!";
-	@RequestMapping(value="/get")
-	public List<Greeting>  getSiteListS(HttpServletRequest request) throws JSONException{
-		
-		System.out.println(request.isSecure()+"         ");
-		
-		List glist = new ArrayList<>();
-		Greeting g1 = new Greeting(1, "Heloo");
-		Greeting g2 = new Greeting(2, "333Heloo");
-		glist.add(g1);
-		glist.add(g2);
-		//return new Greeting(10, String.format(template, "Nitin"));
-		return glist;
-	}
-*/
-
 
 
 }
